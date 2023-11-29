@@ -41,6 +41,17 @@ app.get('/students', (req, res) => {
     res.sendFile('./html/students.html', { root: __dirname });
 });
 
+// GET routes to db
+app.get('/all-courses', (req, res) => {
+    Course.find()
+        .then((result) => {
+            res.send(result);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+});
+
 // CRUD routes
 app.post('/courses', (req, res) => {
     const course = new Course(req.body);
@@ -51,7 +62,19 @@ app.post('/courses', (req, res) => {
         })
         .catch((err) => {
             console.log(err);
+        });
+});
+
+app.delete('/courses/:id', (req, res) => {
+    const id = req.params.id;
+
+    Course.findByIdAndDelete(id)
+        .then(result => {
+            res.json({ redirect: '/courses' });
         })
+        .catch(err => {
+            console.log(err);
+        });
 });
 
 // 404 Page - When added
