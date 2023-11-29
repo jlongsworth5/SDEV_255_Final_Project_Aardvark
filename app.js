@@ -2,6 +2,14 @@
 const express = require('express');
 const mongoose = require('mongoose');
 
+// DB Models
+const Course = require('./models/course');
+const Registration = require('./models/registration');
+const Section = require('./models/section');
+const Student = require('./models/student');
+const Subject = require('./models/subject');
+const Teacher = require('./models/teacher');
+
 // Setup express application
 const app = express();
 app.use(express.static(__dirname));
