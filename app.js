@@ -1,12 +1,16 @@
 // Dependencies
 const express = require('express');
+const mongoose = require('mongoose');
 
 // Setup express application
 const app = express();
 app.use(express.static(__dirname));
 
-// Listen for requests
-app.listen(3000);
+// Connect to MongoDB
+const dbUri = 'mongodb+srv://aardvark:255Project!@sdev255longsworth.oemxn7p.mongodb.net/?retryWrites=true&w=majority';
+mongoose.connect(dbUri)
+    .then((result) => app.listen(3000))
+    .catch((err) => console.log(err));
 
 // Respond to requests
 app.get('/', (req, res) => {
