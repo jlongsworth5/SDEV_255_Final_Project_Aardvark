@@ -3,6 +3,7 @@ const express = require('express');
 
 // Setup express application
 const app = express();
+app.use(express.static(__dirname));
 
 // Listen for requests
 app.listen(3000);
