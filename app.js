@@ -7,7 +7,7 @@ const Course = require('./models/course');
 const Registration = require('./models/registration');
 const Section = require('./models/section');
 const Student = require('./models/student');
-const Subject = require('./models/subject');
+//const Subject = require('./models/subject');
 const Teacher = require('./models/teacher');
 
 // Setup express application
