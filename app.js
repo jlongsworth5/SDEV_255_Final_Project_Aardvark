@@ -13,9 +13,10 @@ const Teacher = require('./models/teacher');
 // Setup express application
 const app = express();
 app.use(express.static(__dirname));
+app.use(express.urlencoded({ extended: true }));
 
 // Connect to MongoDB
-const dbUri = 'mongodb+srv://aardvark:255Project!@sdev255longsworth.oemxn7p.mongodb.net/?retryWrites=true&w=majority';
+const dbUri = 'mongodb+srv://aardvark:255Project!@sdev255longsworth.oemxn7p.mongodb.net/Aardvark?retryWrites=true&w=majority';
 mongoose.connect(dbUri)
     .then((result) => app.listen(3000))
     .catch((err) => console.log(err));
@@ -35,6 +36,19 @@ app.get('/staff', (req, res) => {
 
 app.get('/students', (req, res) => {
     res.sendFile('./html/students.html', { root: __dirname });
+});
+
+// CRUD routes
+app.post('/courses', (req, res) => {
+    const course = new Course(req.body);
+
+    course.save()
+        .then((result) => {
+            res.redirect('/courses');
+        })
+        .catch((err) => {
+            console.log(err);
+        })
 });
 
 // 404 Page - When added

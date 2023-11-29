@@ -3,26 +3,26 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const courseSchema = new Schema({
-    title: {
+    cname: {
         type: String,
         required: true,
     },
-    description: {
+    cdescript: {
         type: String,
         required: true,
     },
-    subjectId: {
-        type: ObjectId,
+    sarea: {
+        type: String,
         required: true,   
     },
-    credits: {
-        type: Int32,
+    chours: {
+        type: Number,
         required: true,
     },
-    abbreviatoin: {
+    /*abbreviatoin: {
         type: String,
         required: false,
-    }
+    }*/
 
 }, { timestamps: true });
 
