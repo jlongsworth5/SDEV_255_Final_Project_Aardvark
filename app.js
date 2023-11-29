@@ -10,13 +10,16 @@ const Student = require('./models/student');
 //const Subject = require('./models/subject');
 const Teacher = require('./models/teacher');
 
+// Get config settings
+const Config = require('./config');
+
 // Setup express application
 const app = express();
 app.use(express.static(__dirname));
 app.use(express.urlencoded({ extended: true }));
 
 // Connect to MongoDB
-const dbUri = 'mongodb+srv://aardvark:255Project!@sdev255longsworth.oemxn7p.mongodb.net/Aardvark?retryWrites=true&w=majority';
+const dbUri = 'mongodb+srv://' + Config.database.username + ':' + Config.database.password + '@sdev255longsworth.oemxn7p.mongodb.net/Aardvark?retryWrites=true&w=majority';
 mongoose.connect(dbUri)
     .then((result) => app.listen(3000))
     .catch((err) => console.log(err));
