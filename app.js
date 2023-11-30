@@ -67,6 +67,7 @@ app.get('/students', (req, res) => {
 });
 
 // CRUD routes
+// Create a course
 app.post('/courses', (req, res) => {
     const course = new Course(req.body);
 
@@ -79,9 +80,10 @@ app.post('/courses', (req, res) => {
         });
 });
 
+// Update a course
 app.post('/courses/:id', (req, res) => { 
     const id = req.params.id;
-    Course.updateOne({ _id: id }, { chours: 4 })
+    Course.updateOne({ _id: id }, { cname: req.body.cname, cdescript: req.body.cdescript, sarea: req.body.sarea, chours: req.body.chours })
         .then((result) => {
             res.redirect('/courses');
         })
@@ -90,6 +92,7 @@ app.post('/courses/:id', (req, res) => {
         });
 });
 
+// Delete a course
 app.delete('/courses/:id', (req, res) => {
     const id = req.params.id;
 
