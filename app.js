@@ -90,24 +90,6 @@ app.post('/courses/:id', (req, res) => {
         });
 });
 
-app.post('/test/:id', (req, res) => { 
-    const id = req.params.id; 
-
-    Course.findById(id)
-        .then((model) => {
-            return Object.assign(model, { chours: req.body.chours });
-        })
-        .then((model) => {
-            return model.Save();
-        })
-        .then((updatedModel) => {
-            res.json({ redirect: '/courses' });
-        })
-        .catch(err => {
-            console.log(err);
-        });
-});
-
 app.delete('/courses/:id', (req, res) => {
     const id = req.params.id;
 
