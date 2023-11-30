@@ -168,6 +168,14 @@ h3 {
   color: #878787
 }
 
+#courses-offered, #course-list {
+  text-align: left;
+}
+
+.courses {
+  padding-bottom: 10px;
+}
+
 .course-title {
   color: #fff;
   text-transform: uppercase;
@@ -176,6 +184,7 @@ h3 {
 #course-list a {
   display: block;
   text-decoration: none;
+  margin: 40px;
 }
 
 #course-list a:hover h3 {
@@ -211,8 +220,13 @@ p, main ul {
 
 #welcome, #about-us, #contact, #sign-up, #signup-btn, #courses-offered, #course-list, #modify, #add-class, #delete-class, #modify-class {
   background-color: #303030;
-  padding: 20px;
+  padding: 30px;
   width: 80%;
+}
+
+#welcome p, #about-us p, #contact p, #sign-up p, #courses-offered p, #modify p {
+  padding: 0 20px;
+  line-height:1.35;
 }
 
 #single-course  a{
