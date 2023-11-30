@@ -1,30 +1,8 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>Aardvark Valley Institute</title>
-  <link href="/style.css" rel="stylesheet" type="text/css" />
-</head>
+<html lang="en">
+<%- include("./partials/head.ejs") %>
 
 <body>
-
-  <header>
-    <img src="/assets/logo.svg" alt="logo" class="logo" id="logo">
-
-    <div class="navbar">
-      <nav>
-        <ul>
-          <li><a href="/">Home</a></li> 
-          <li><a href="/courses">Courses</a></li>
-          <li><a href="/students">Students</a></li>
-          <li><a href="/staff">Staff</a></li>
-        </ul>
-      </nav>
-    </div>
-
-  </header>
+    <%- include("./partials/navbar.ejs") %>  
 
   <main class="content">
 
@@ -83,21 +61,25 @@
     <section id="delete-class">
       <div class="delete-section">
         <h2>Delete A Class</h2>
-          <form action="/html/courses.html">
+          <form>
                         <div class="row">
                           <div class="label-col">
                             <label for="course-name">Course Name</label>
                           </div>
                           <div class="input-col">
-                            <select id="course-name" name="course-name">
-                              <option value="biology">Biology 101</option>
-                              <option value="chemistry">Chemistry 101</option>
-                              <option value="physics">Physics 101</option>"
+                            <select id="course-name" name="id">
+                            <% if (courses.length > 0) { %>
+                                <% courses.forEach(course => { %>
+                                    <option value="<%= course._id %>"><%= course.cname %></option>
+                                <% }) %>
+                            <% } else { %>
+                                <p>No courses available</p>                            
+                            <% } %>
                           </div>
                         </div>
                         <br>            
                         <div class="row">
-                          <input type="submit" value="Delete">
+                          <input class="delete" type="submit" value="Delete">
                         </div>
           </form>
       </div>
@@ -127,13 +109,8 @@
     </section>
 
   </main>
-
-  <footer>
-    <p>Copyright &copy; 2023 by The Aardvark Group</p>    
-  </footer>
-
-  <script src="script.js"></script>
-
+  <%- include("./partials/footer.ejs") %>
+  
 </body>
 
 </html>
