@@ -1,0 +1,116 @@
+<html lang="en">
+<%- include("./partials/head.ejs") %>
+
+<body>
+    <%- include("./partials/navbar.ejs") %>  
+
+  <main class="content">
+
+    <section id="modify">
+      <div class="section-inner">
+        <h1>Modify Courses</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. At deserunt magni molestiae. Est, minus? Obcaecati nemo modi, necessitatibus possimus deserunt tempora fugit numquam animi! Cum exercitationem deserunt nemo numquam suscipit!</p>
+      </div>
+    </section>
+
+    <section id="add-class">
+      <div class="add-section">
+        <h2>Add A Class</h2>
+          <form action="/courses" method="POST">
+                        <div class="row">
+                          <div class="label-col">
+                            <label for="cname">Course Name</label>
+                          </div>
+                          <div class="input-col">
+                            <input type="text" id="cname" name="cname" placeholder="Course name.." required>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="label-col">
+                            <label for="cdescript">Course Description</label>
+                          </div>
+                          <div class="input-col">
+                            <input type="text" id="cdescript" name="cdescript" placeholder="Description of the course.." required>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="label-col">
+                            <label for="sarea">Subject Area</label>
+                          </div>
+                          <div class="input-col">
+                            <input type="text" id="sarea" name="sarea" placeholder="Subject area.." required>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="label-col">
+                            <label for="chours">Credit Hours</label>
+                          </div>
+                          <div class="input-col">
+                            <input type="text" id="chours" name="chours" placeholder="Number of credit hours.." required>
+                          </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                          <input type="submit" value="  Add  ">
+                        </div>
+          </form>        
+        
+      </div>
+    </section>
+
+    <section id="delete-class">
+      <div class="delete-section">
+        <h2>Delete A Class</h2>
+          <form>
+                        <div class="row">
+                          <div class="label-col">
+                            <label for="course-name">Course Name</label>
+                          </div>
+                          <div class="input-col">
+                            <select id="course-name" name="id">
+                            <% if (courses.length > 0) { %>
+                                <% courses.forEach(course => { %>
+                                    <option value="<%= course._id %>"><%= course.cname %></option>
+                                <% }) %>
+                            <% } else { %>
+                                <p>No courses available</p>                            
+                            <% } %>
+                          </div>
+                        </div>
+                        <br>            
+                        <div class="row">
+                          <input class="delete" type="submit" value="Delete">
+                        </div>
+          </form>
+      </div>
+    </section>
+
+    <section id="modify-class">
+      <div class="modify-section">
+        <h2>Modify A Class</h2>
+          <form action="/html/courses.html">
+                        <div class="row">
+                          <div class="label-col">
+                            <label for="course-name">Course Name</label>
+                          </div>
+                          <div class="input-col">
+                            <select id="course-name" name="course-name">
+                              <option value="biology">Biology 101</option>
+                              <option value="chemistry">Chemistry 101</option>
+                              <option value="physics">Physics 101</option>"
+                          </div>
+                        </div>
+                        <br>            
+                        <div class="row">
+                          <input type="submit" value="Modify">
+                        </div>
+          </form>
+      </div>
+    </section>
+
+  </main>
+  <%- include("./partials/footer.ejs") %>
+  
+</body>
+
+</html>
