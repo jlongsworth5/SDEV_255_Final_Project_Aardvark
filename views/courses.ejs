@@ -18,6 +18,7 @@
         <h2>Courses</h2>
         <% if (courses.length > 0) { %>
             <% courses.forEach(course => { %>
+              <a class= "single-course" href="">
                 <h3><span class="course-title"><%= course.cname %></span> <span class="credits">| <%= course.sarea %> | <%= course.chours %> Credits</span></h3>
                 <p><%= course.cdescript %></p>
               </a>

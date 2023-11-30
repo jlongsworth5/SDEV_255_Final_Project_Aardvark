@@ -97,7 +97,7 @@ nav a:hover::before {
 }
 
 main li {
-  margin: 15px 45px;
+  margin: 15px 10px;
   display: inline-block;
 }
 
@@ -173,6 +173,17 @@ h3 {
   text-transform: uppercase;
 }
 
+#course-list a {
+  display: block;
+  text-decoration: none;
+}
+
+#course-list a:hover h3 {
+  color: #ac5633;
+  padding-left: 5px;
+  border-left: 6px solid #ac5633;
+}
+
 .credits {
   font-weight:300;
 }
@@ -202,6 +213,10 @@ p, main ul {
   background-color: #303030;
   padding: 20px;
   width: 80%;
+}
+
+#single-course  a{
+  text-decoration: none;
 }
 
 form * {
