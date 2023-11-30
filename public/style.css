@@ -20,6 +20,7 @@ body {
   padding-top: 70px;
 }
 
+/* navbar */
 header {
   font-family: 'Unica One', sans-serif;
   background-color: #202020;
@@ -29,40 +30,8 @@ header {
   left: 0;
 }
 
-header::after {
-  content: '';
-  display: table;
-  clear: both;
-}
-
-header ul {
-  padding: 0;
-}
-
-header li {
-  margin-left: 50px;
-  padding-top: 23px;
-}
-
-.logo {
-  float: left;
-  padding: 15px 20px;
-  height: 40px;
-}
-
-.navbar {
-  width: 90%;
-  margin: 0 auto;
-}
-
 nav {
   float: right;
-}
-
-nav ul, main ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
 }
 
 nav li {
@@ -77,10 +46,29 @@ nav a {
   font-size: 20px;
 }
 
+header ul {
+  padding: 0;
+}
+
+header li {
+  margin-left: 50px;
+  padding-top: 23px;
+}
+
+nav ul, main ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
 nav a:hover {
   color: #ac5633
 }
-
+header::after {
+  content: '';
+  display: table;
+  clear: both;
+}
 nav a::before {
   content: '';
   display: block;
@@ -96,6 +84,18 @@ nav a:hover::before {
   width: 100%;
 }
 
+.logo {
+  float: left;
+  padding: 15px 20px;
+  height: 40px;
+}
+
+.navbar {
+  width: 90%;
+  margin: 0 auto;
+}
+
+/* body */
 main li {
   margin: 15px 10px;
   display: inline-block;
@@ -109,6 +109,24 @@ section {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+h1 {
+  font-size: 2.6em;
+  color: #ac5633;
+}
+
+h2 {
+  font-size: 2em;
+  color: #cb8c2f;
+}
+
+h3 {
+  color: #878787
+}
+
+p, main ul {
+  color: #999;
 }
 
 #not-found {
@@ -136,40 +154,16 @@ section {
   width: 90%;
 }
 
+#courses-offered, #course-list {
+  text-align: left;
+}
+
 .contact-list {
   text-align: center;
 }
 
 .course-heading {
   font-weight: 600;
-}
-
-footer {
-  position: relative;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  text-align: center;
-  padding: 10px;
-  background-color: #202020;
-}
-
-h1 {
-  font-size: 2.6em;
-  color: #ac5633;
-}
-
-h2 {
-  font-size: 2em;
-  color: #cb8c2f;
-}
-
-h3 {
-  color: #878787
-}
-
-#courses-offered, #course-list {
-  text-align: left;
 }
 
 .courses {
@@ -179,18 +173,6 @@ h3 {
 .course-title {
   color: #fff;
   text-transform: uppercase;
-}
-
-#course-list a {
-  display: block;
-  text-decoration: none;
-  margin: 40px;
-}
-
-#course-list a:hover h3 {
-  color: #ac5633;
-  padding-left: 5px;
-  border-left: 6px solid #ac5633;
 }
 
 .credits {
@@ -214,8 +196,16 @@ h3 {
   background-color: #ac5633;
 }
 
-p, main ul {
-  color: #999;
+#course-list a {
+  display: block;
+  text-decoration: none;
+  margin: 40px;
+}
+
+#course-list a:hover h3 {
+  color: #ac5633;
+  padding-left: 5px;
+  border-left: 6px solid #ac5633;
 }
 
 #welcome, #about-us, #contact, #sign-up, #signup-btn, #courses-offered, #course-list, #modify, #add-class, #delete-class, #modify-class {
@@ -233,31 +223,36 @@ p, main ul {
   text-decoration: none;
 }
 
+/* forms, labels, inputs, textarea, select dropdowns, submit buttons */
 form * {
   box-sizing: border-box;
 }
 
-input[type=text], select {
+input[type=text], select, textarea {
   width: 100%;
   padding: 10px;
   border: 1px solid #202020;
   border-radius: 5px;
   color: #878787;
   resize: vertical;
+  font-family: 'Josefin Sans', sans-serif;
 }
 
-input[type=text]:focus {
+textarea {
+  resize: none;
+}
+
+input[type=text]:focus, textarea:focus {
   background-color: #ac5633;
   color: #fff;
 }
 
-input[type=text]:focus::placeholder {
+input[type=text]:focus::placeholder, textarea:focus::placeholder {
   color: #fff;
 }
 
 select {
   margin-bottom: 17px;
-  
 }
 
 label {
@@ -273,6 +268,7 @@ input[type=submit] {
   border-radius: 5px;
   cursor: pointer;
   float: right;
+  font-family: 'Josefin Sans', sans-serif;
 }
 
 input[type=submit]:hover {
@@ -304,6 +300,18 @@ input[type=submit]:hover {
   clear: both;
 }
 
+/* footer */
+footer {
+  position: relative;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+  background-color: #202020;
+}
+
+/* adaptation for mobile screens */
 @media screen and (max-width: 600px) {
   .label-col, .input-col, input[type=submit] {
     width: 100%;
