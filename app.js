@@ -102,9 +102,7 @@ app.delete('/courses/:id', (req, res) => {
         });
 });
 
-// 404 Page - When added
-/*
+// 404 Page
 app.use((req, res) => {
-    res.status(404).sendFile('./html/404.html', { root: __dirname });    
+    res.status(404).render('404', { title: '404' });    
 });
-*/

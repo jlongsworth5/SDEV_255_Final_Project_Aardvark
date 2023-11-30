@@ -111,6 +111,16 @@ section {
   align-items: center;
 }
 
+#not-found {
+  margin: 250px auto;
+  font-weight: 600;
+  padding: 20px;
+  width: 80%;
+  border-top: none;
+  border-bottom: none;
+  font-size: 2em;
+}
+
 #welcome, #courses-offered, #sign-up, #modify {
   margin: 20px 0 0 0;
   border-top: none;
@@ -142,7 +152,6 @@ footer {
   text-align: center;
   padding: 10px;
   background-color: #202020;
-  color: #878787;
 }
 
 h1 {
@@ -186,7 +195,7 @@ h3 {
 }
 
 p, main ul {
-  color: #878787;
+  color: #999;
 }
 
 #welcome, #about-us, #contact, #sign-up, #signup-btn, #courses-offered, #course-list, #modify, #add-class, #delete-class, #modify-class {
