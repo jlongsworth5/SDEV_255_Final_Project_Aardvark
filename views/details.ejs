@@ -9,65 +9,10 @@
     <section id="courses-offered">
       <div class="section-inner">
         <h1><%= course.cname %></h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur voluptatum maxime beatae qui quod. Amet minus accusantium nesciunt provident, sint tempore ratione aliquam sed harum labore possimus sit laudantium nisi.</p>
+        <p><%= course.cdescript %></p>
       </div>
-      <input type="submit" class="delete" data-doc="<%= course._id %>" value="Delete" >
     </section>
-
-    <section id="add-class">
-        <div class="add-section">
-          <h2>Modify Class</h2>
-            <form action="/courses/<%= course._id %>" method="POST">
-                          <div class="row">
-                            <div class="label-col">
-                              <label for="cname">Course Name</label>
-                            </div>
-                            <div class="input-col">
-                              <input type="text" id="cname" name="cname" value="<%= course.cname %>" required>
-                            </div>
-                          </div>
-                          <div class="row">
-                            <div class="label-col">
-                              <label for="cdescript">Course Description</label>
-                            </div>
-                            <div class="input-col">
-                              <textarea id="cdescript" name="cdescript" required rows="4" cols="50"><%= course.cdescript %></textarea>
-                            </div>
-                          </div>
-                          <div class="row">
-                            <div class="label-col">
-                              <label for="sarea">Subject Area</label>
-                            </div>
-                            <div class="input-col">
-                              <select name="sarea" id="sarea" required>
-                                <% if (subjects.length > 0) { %>
-                                  <% subjects.forEach(subject => { %>
-                                    <option value="<%= subject.title %>"><%= subject.title %></option>                                
-                                  <% }) %>
-                                <% } else { %>
-                                  <p>There are no subjects to select.</p>                              
-                                <% } %>
-                              </select>
-                            </div>
-                          </div>
-                          <div class="row">
-                            <div class="label-col">
-                              <label for="chours">Credit Hours</label>
-                            </div>
-                            <div class="input-col">
-                              <input type="text" id="chours" name="chours" value="<%= course.chours %>" required>
-                            </div>
-                          </div>
-                          <br>
-                          <div class="row">
-                            <input type="submit" value="Modify">
-                          </div>
-            </form>        
-          
-        </div>
-      </section>
     
-
   </main>
 
 </body>

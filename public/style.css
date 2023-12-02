@@ -144,7 +144,7 @@ p, main ul {
   border-top: none;
 }
 
-#contact, #course-list, #signup-btn, #modify-class {
+#contact, #course-list, #signup-btn {
   margin: 0 0 20px 0;
   border-bottom: none;
 }
@@ -282,8 +282,8 @@ input[type=submit]:hover, input[type=button]:hover {
   width: 90%;
 }
 
-#cancel-update {
-  margin-right: 10px;
+#delete-button {
+  margin-left: 10px;
 }
 
 .label-col {

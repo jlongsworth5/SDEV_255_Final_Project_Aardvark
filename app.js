@@ -46,21 +46,35 @@ app.get('/courses', (req, res) => {
 
 //  Retrieve a single course details, used to delete or modify a course
 app.get('/courses/:id', (req, res) => {
+    const id = req.params.id;    
+    
+    Course.findById(id)
+        .then(result => {
+            res.render('details', { course: result, title: 'Course Details' });
+        })
+        .catch(err => {
+            console.log(err);
+        });       
+});
+
+// Go to modify course page
+app.get('/update/:id', (req, res) => {
     const id = req.params.id;
     let subjects = {};
+    
     Subject.find().sort({ title: 1 })
-        .then(result => {
-            subjects = result;            
+        .then(sResult => {
+            subjects = sResult;
         })
         .then(() => {
             Course.findById(id)
-                .then(result => {
-                    res.render('details', { course: result, subjects: subjects, title: 'Modify Course' });
+                .then(cResult => {
+                    res.render('update', { course: cResult, subjects: subjects, title: 'Modify Course' });
                 })
                 .catch(err => {
                     console.log(err);
-                });
-        })
+                });                
+            })                  
         .catch((err) => {
             console.log(err);
         });
@@ -69,14 +83,15 @@ app.get('/courses/:id', (req, res) => {
 //  Page for teachers to add courses
 app.get('/staff', (req, res) => {
     let subjects = {};
+    
     Subject.find().sort({ title: 1 })
-        .then(result => {
-            subjects = result;
+        .then(sResult => {
+            subjects = sResult;
         })
         .then(() => {
             Course.find().sort({ cname: 1 })
-                .then((result) => {
-                    res.render('staff', {updateHidden: true, courses: result, subjects: subjects, title: 'Staff' });
+                .then((cResult) => {
+                    res.render('staff', {courses: cResult, subjects: subjects, title: 'Staff' });
                 })
                 .catch((err) => {
                     console.log(err);
@@ -96,6 +111,7 @@ app.get('/students', (req, res) => {
 // Create a course
 app.post('/courses', (req, res) => {
     const course = new Course(req.body);
+    course.cname = course.cname.toUpperCase();
 
     course.save()
         .then((result) => {
