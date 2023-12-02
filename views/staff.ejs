@@ -40,7 +40,7 @@
                             <select name="sarea" id="sarea" required>
                               <% if (subjects.length > 0) { %>
                                 <% subjects.forEach(subject => { %>
-                                  <option value="<%= subject._id %>"><%= subject.title %></option>                                
+                                  <option value="<%= subject._title %>"><%= subject.title %></option>                                
                                 <% }) %>
                               <% } else { %>
                                 <p>There are no subjects to select.</p>                              
@@ -71,10 +71,10 @@
             <label for="cname">Course Name</label>
           </div>
           <div class="input-col">
-            <select name="cname" id="cname" required>
+            <select name="cname" id="cname-select" required>
               <% if (courses.length > 0) { %>
                 <% courses.forEach(course => { %>
-                  <option id="option" value="<%= course._id %>"><%= course.cname %></option>                                
+                  <option value="<%= course._id %>"><%= course.cname %></option>                                
                 <% }) %>
               <% } else { %>
                 <p>There are no courses to select.</p>                              
@@ -89,13 +89,28 @@
 
   <script>
     const modifyButton = document.querySelector('input.modify');
+    const modifySelect = document.getElementById('cname-select');
+    let selectedCourseId; 
+    selectedCourseId = GetSelectedOption(modifySelect);
 
+    // Detemine which class is selected for modification
+    modifySelect.addEventListener('change', (e) => {
+      GetSelectedOption(modifySelect);
+    });
+
+    // Redirect to the update page for the selected class
     modifyButton.addEventListener('click', (e) => {      
-      selectedCourse = document.getElementById('option');
-      const endPoint = `/update/${selectedCourse.value}`;
+      const endPoint = `/update/${selectedCourseId}`;
 
       window.location.href = endPoint;
     });
+
+    // Determine the id for the currently selected class in the modification drop down
+    function GetSelectedOption(modifySelect) {
+      let options = modifySelect.getElementsByTagName('option');
+      selectedCourseId = options[modifySelect.selectedIndex].value;
+      return selectedCourseId;
+    }
 </script>
 
 </body>
