@@ -39,7 +39,15 @@
                               <label for="sarea">Subject Area</label>
                             </div>
                             <div class="input-col">
-                              <input type="text" id="sarea" name="sarea" value="<%= course.sarea %>" required>
+                              <select name="sarea" id="sarea" required>
+                                <% if (subjects.length > 0) { %>
+                                  <% subjects.forEach(subject => { %>
+                                    <option value="<%= subject.title %>"><%= subject.title %></option>                                
+                                  <% }) %>
+                                <% } else { %>
+                                  <p>There are no subjects to select.</p>                              
+                                <% } %>
+                              </select>
                             </div>
                           </div>
                           <div class="row">

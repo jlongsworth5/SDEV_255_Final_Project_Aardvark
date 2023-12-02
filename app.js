@@ -8,7 +8,7 @@ const { render } = require('ejs');
 const Course = require('./models/course');
 const Registration = require('./models/registration');
 const Student = require('./models/student');
-//const Subject = require('./models/subject');
+const Subject = require('./models/subject');
 const Teacher = require('./models/teacher');
 
 // Get config settings
@@ -44,23 +44,43 @@ app.get('/courses', (req, res) => {
 
 app.get('/courses/:id', (req, res) => {
     const id = req.params.id;
-    Course.findById(id)
+    let subjects = {};
+    Subject.find().sort({ title: 1 })
         .then(result => {
-            res.render('details', { course: result, title: 'Modify Course' });
+            subjects = result;            
         })
-        .catch(err => {
+        .then(() => {
+            Course.findById(id)
+                .then(result => {
+                    res.render('details', { course: result, subjects: subjects, title: 'Modify Course' });
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+        })
+        .catch((err) => {
             console.log(err);
         });
 });
 
 app.get('/staff', (req, res) => {
-    Course.find().sort({ cname: 1 })
-    .then((result) => {
-        res.render('staff', {courses: result, title: 'Staff' });
-    })
-    .catch((err) => {
-        console.log(err);
-    });    
+    let subjects = {};
+    Subject.find().sort({ title: 1 })
+        .then(result => {
+            subjects = result;
+        })
+        .then(() => {
+            Course.find().sort({ cname: 1 })
+                .then((result) => {
+                    res.render('staff', {courses: result, subjects: subjects, title: 'Staff' });
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+            })                
+        .catch((err) => {
+            console.log(err);
+        });
 });
 
 app.get('/students', (req, res) => {
