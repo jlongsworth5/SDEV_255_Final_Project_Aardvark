@@ -54,6 +54,7 @@ app.get('/courses/:id', (req, res) => {
         })
         .catch(err => {
             console.log(err);
+            res.status(404).render('404', { title: '404' });
         });       
 });
 
@@ -73,6 +74,7 @@ app.get('/update/:id', (req, res) => {
                 })
                 .catch(err => {
                     console.log(err);
+                    res.status(404).render('404', { title: '404' });
                 });                
             })                  
         .catch((err) => {
@@ -131,6 +133,7 @@ app.post('/courses/:id', (req, res) => {
         })
         .catch((err) => {
             console.log(err);
+            res.status(404).render('404', { title: '404' });
         });
 });
 
@@ -144,6 +147,7 @@ app.delete('/courses/:id', (req, res) => {
         })
         .catch(err => {
             console.log(err);
+            res.status(404).render('404', { title: '404' });
         });
 });
 
