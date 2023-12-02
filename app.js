@@ -1,8 +1,8 @@
 // Dependencies
-const express = require('express');
-const morgan = require('morgan');
-const mongoose = require('mongoose');
-const { render } = require('ejs');
+const express = require('express');     //  Used for simplified code expressions
+const mongoose = require('mongoose');   //  Used to access the cloud db
+const morgan = require('morgan');       //  Used to log requests and responses in the terminal when running in development environment
+const { render } = require('ejs');      //  Used to embed javascript in the html
 
 // DB Models
 const Course = require('./models/course');
@@ -27,11 +27,13 @@ mongoose.connect(dbUri)
     .then((result) => app.listen(3000))
     .catch((err) => console.log(err));
 
-// Respond to requests
+// Route requests to appropriate pages
+//  Home page
 app.get('/', (req, res) => {
     res.render('index', { title: 'Home' })
 });
 
+//  Course listings
 app.get('/courses', (req, res) => {
     Course.find().sort({ cname: 1 })
         .then((result) => {
@@ -42,6 +44,7 @@ app.get('/courses', (req, res) => {
         });
 });
 
+//  Retrieve a single course details, used to delete or modify a course
 app.get('/courses/:id', (req, res) => {
     const id = req.params.id;
     let subjects = {};
@@ -63,6 +66,7 @@ app.get('/courses/:id', (req, res) => {
         });
 });
 
+//  Page for teachers to add courses
 app.get('/staff', (req, res) => {
     let subjects = {};
     Subject.find().sort({ title: 1 })
@@ -83,6 +87,7 @@ app.get('/staff', (req, res) => {
         });
 });
 
+//  Page for students to register for courses
 app.get('/students', (req, res) => {
     res.render('students', { title: 'Students' });
 });
@@ -126,7 +131,7 @@ app.delete('/courses/:id', (req, res) => {
         });
 });
 
-// 404 Page
+// 404 Page, default route for any uncaught requests
 app.use((req, res) => {
     res.status(404).render('404', { title: '404' });    
 });
