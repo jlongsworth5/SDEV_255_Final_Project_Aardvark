@@ -260,7 +260,7 @@ label {
   display: inline-block;
 }
 
-input[type=submit] {
+input[type=submit], input[type=button] {
   background-color: #cb8c2f;
   color: #202020;
   padding: 12px 20px;
@@ -271,7 +271,7 @@ input[type=submit] {
   font-family: 'Josefin Sans', sans-serif;
 }
 
-input[type=submit]:hover {
+input[type=submit]:hover, input[type=button]:hover {
   background-color: #ac5633;
 }
 
@@ -280,6 +280,10 @@ input[type=submit]:hover {
   background-color: #303030;
   padding: 20px;
   width: 90%;
+}
+
+#cancel-update {
+  margin-right: 10px;
 }
 
 .label-col {
@@ -313,7 +317,7 @@ footer {
 
 /* adaptation for mobile screens */
 @media screen and (max-width: 600px) {
-  .label-col, .input-col, input[type=submit] {
+  .label-col, .input-col, input[type=submit], input[type=button] {
     width: 100%;
     margin-top: 0;
   }

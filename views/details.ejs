@@ -70,21 +70,6 @@
 
   </main>
 
-  <script>
-    const trashcan = document.querySelector('input.delete');
-
-    trashcan.addEventListener('click', (e) => {
-        const endpoint = `/courses/${trashcan.dataset.doc}`;
-
-        fetch(endpoint, {
-            method: 'DELETE'
-        })
-        .then((response) => response.json())
-        .then((data) => window.location.href = data.redirect)
-        .catch(err => console.log(err));
-    });
-</script>
-
 </body>
 <%- include("./partials/footer.ejs") %>
 

@@ -76,7 +76,7 @@ app.get('/staff', (req, res) => {
         .then(() => {
             Course.find().sort({ cname: 1 })
                 .then((result) => {
-                    res.render('staff', {courses: result, subjects: subjects, title: 'Staff' });
+                    res.render('staff', {updateHidden: true, courses: result, subjects: subjects, title: 'Staff' });
                 })
                 .catch((err) => {
                     console.log(err);
