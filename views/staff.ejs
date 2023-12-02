@@ -40,7 +40,7 @@
                             <select name="sarea" id="sarea" required>
                               <% if (subjects.length > 0) { %>
                                 <% subjects.forEach(subject => { %>
-                                  <option value="<%= subject._title %>"><%= subject.title %></option>                                
+                                  <option value="<%= subject.title %>"><%= subject.title %></option>                                
                                 <% }) %>
                               <% } else { %>
                                 <p>There are no subjects to select.</p>                              
