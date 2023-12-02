@@ -1,27 +1,28 @@
 // Dependencies
 const express = require('express');
+const morgan = require('morgan');
 const mongoose = require('mongoose');
 const { render } = require('ejs');
 
 // DB Models
 const Course = require('./models/course');
 const Registration = require('./models/registration');
-const Section = require('./models/section');
 const Student = require('./models/student');
 //const Subject = require('./models/subject');
 const Teacher = require('./models/teacher');
 
 // Get config settings
-const Config = require('./config');
+const config = require('./config');
 
 // Setup express application
 const app = express();
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
+app.use(morgan('dev'));
 app.set('view engine', 'ejs');
 
 // Connect to MongoDB
-const dbUri = 'mongodb+srv://' + Config.database.username + ':' + Config.database.password + '@sdev255longsworth.oemxn7p.mongodb.net/Aardvark?retryWrites=true&w=majority';
+const dbUri = 'mongodb+srv://' + config.database.username + ':' + config.database.password + '@sdev255longsworth.oemxn7p.mongodb.net/Aardvark?retryWrites=true&w=majority';
 mongoose.connect(dbUri)
     .then((result) => app.listen(3000))
     .catch((err) => console.log(err));
