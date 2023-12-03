@@ -8,74 +8,11 @@
 
     <section id="courses-offered">
       <div class="section-inner">
-        <h1><%= course.cname %></h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur voluptatum maxime beatae qui quod. Amet minus accusantium nesciunt provident, sint tempore ratione aliquam sed harum labore possimus sit laudantium nisi.</p>
+        <h1><span class="course-title"><%= course.cname %></span><span class="credits">| <%= course.sarea %> | <%= course.chours %> Credits</span></h1>
+        <p><%= course.cdescript %></p>
       </div>
-      <input type="submit" class="delete" data-doc="<%= course._id %>" value="Delete" >
     </section>
-
-    <section id="add-class">
-        <div class="add-section">
-          <h2>Modify Class</h2>
-            <form action="/courses/<%= course._id %>" method="POST">
-                          <div class="row">
-                            <div class="label-col">
-                              <label for="cname">Course Name</label>
-                            </div>
-                            <div class="input-col">
-                              <input type="text" id="cname" name="cname" value="<%= course.cname %>" required>
-                            </div>
-                          </div>
-                          <div class="row">
-                            <div class="label-col">
-                              <label for="cdescript">Course Description</label>
-                            </div>
-                            <div class="input-col">
-                              <input type="text" id="cdescript" name="cdescript" value="<%= course.cdescript %>" required>
-                            </div>
-                          </div>
-                          <div class="row">
-                            <div class="label-col">
-                              <label for="sarea">Subject Area</label>
-                            </div>
-                            <div class="input-col">
-                              <input type="text" id="sarea" name="sarea" value="<%= course.sarea %>" required>
-                            </div>
-                          </div>
-                          <div class="row">
-                            <div class="label-col">
-                              <label for="chours">Credit Hours</label>
-                            </div>
-                            <div class="input-col">
-                              <input type="text" id="chours" name="chours" value="<%= course.chours %>" required>
-                            </div>
-                          </div>
-                          <br>
-                          <div class="row">
-                            <input type="submit" value="Modify">
-                          </div>
-            </form>        
-          
-        </div>
-      </section>
-    
-
   </main>
-
-  <script>
-    const trashcan = document.querySelector('input.delete');
-
-    trashcan.addEventListener('click', (e) => {
-        const endpoint = `/courses/${trashcan.dataset.doc}`;
-
-        fetch(endpoint, {
-            method: 'DELETE'
-        })
-        .then((response) => response.json())
-        .then((data) => window.location.href = data.redirect)
-        .catch(err => console.log(err));
-    });
-</script>
 
 </body>
 <%- include("./partials/footer.ejs") %>
