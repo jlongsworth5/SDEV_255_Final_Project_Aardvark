@@ -10,7 +10,6 @@ body {
   background-color: #424242;
   font-family: 'Josefin Sans', sans-serif;
   font-weight: 400;
-  
 }
 
 .content {
@@ -64,11 +63,13 @@ nav ul, main ul {
 nav a:hover {
   color: #ac5633
 }
+
 header::after {
   content: '';
   display: table;
   clear: both;
 }
+
 nav a::before {
   content: '';
   display: block;
@@ -156,6 +157,14 @@ p, main ul {
 
 #courses-offered, #course-list {
   text-align: left;
+}
+
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  width: 800px;
 }
 
 .contact-list {
