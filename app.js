@@ -64,6 +64,7 @@ app.get('/students', (req, res) => {
     res.render('students', { title: 'Students' });
 });
 
+// Page for staff to add and modify courses
 app.get('/staff', (req, res) => {
     let subjects = {};
 
@@ -86,6 +87,7 @@ app.get('/staff', (req, res) => {
 });
 
 app.use('/courses', courseRoutes);
+app.use(authRoutes);
 //app.use('/staff', staffRoutes);
 
 // 404 Page, default route for any uncaught requests
