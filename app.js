@@ -66,26 +66,14 @@ app.get('/students', (req, res) => {
 
 app.get('/staff', (req, res) => {
     let subjects = {};
-    let courses = {};
 
-    const test = Course.find();
-    console.log(test.length);
-    
     Subject.find().sort({ title: 1 })
         .then(sResult => {
             subjects = sResult;            
         })
         .then(() => {
             Course.find().sort({ cname: 1 })
-                .then((cResult) => {
-                    courses = cResult;
-                    if (courses.length > 0) {
-                        console.log("HELP");
-                    }
-                    else {
-                        console.log("BROKEN");
-                    }
-                    
+                .then((cResult) => {                    
                     res.render('staff', {courses: cResult, subjects: subjects, title: 'Staff' });
                 })
                 .catch((err) => {
