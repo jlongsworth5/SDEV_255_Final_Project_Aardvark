@@ -4,12 +4,14 @@ const mongoose = require('mongoose');   //  Used to access the cloud db
 const morgan = require('morgan');       //  Used to log requests and responses in the terminal when running in development environment
 const { render } = require('ejs');      //  Used to embed javascript in the html
 
+// Import Routers
+const courseRoutes = require('./routes/courseRoutes');
+
 // DB Models
 const Course = require('./models/course');
 const Registration = require('./models/registration');
 const Student = require('./models/student');
 const Subject = require('./models/subject');
-const Teacher = require('./models/teacher');
 
 // Get config settings
 const config = require('./config');
@@ -31,31 +33,6 @@ mongoose.connect(dbUri)
 //  Home page
 app.get('/', (req, res) => {
     res.render('index', { title: 'Home' })
-});
-
-//  Course listings
-app.get('/courses', (req, res) => {
-    Course.find().sort({ cname: 1 })
-        .then((result) => {
-            res.render('courses', {courses: result, title: 'Courses' });
-        })
-        .catch((err) => {
-            console.log(err);
-        });
-});
-
-//  Retrieve a single course details, used to delete or modify a course
-app.get('/courses/:id', (req, res) => {
-    const id = req.params.id;    
-    
-    Course.findById(id)
-        .then(result => {
-            res.render('details', { course: result, title: 'Course Details' });
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(404).render('404', { title: '404' });
-        });       
 });
 
 // Go to modify course page
@@ -82,17 +59,21 @@ app.get('/update/:id', (req, res) => {
         });
 });
 
-//  Page for teachers to add courses
+//  Page for students to register for courses
+app.get('/students', (req, res) => {
+    res.render('students', { title: 'Students' });
+});
+
 app.get('/staff', (req, res) => {
     let subjects = {};
-    
+
     Subject.find().sort({ title: 1 })
         .then(sResult => {
-            subjects = sResult;
+            subjects = sResult;            
         })
         .then(() => {
             Course.find().sort({ cname: 1 })
-                .then((cResult) => {
+                .then((cResult) => {                    
                     res.render('staff', {courses: cResult, subjects: subjects, title: 'Staff' });
                 })
                 .catch((err) => {
@@ -104,52 +85,8 @@ app.get('/staff', (req, res) => {
         });
 });
 
-//  Page for students to register for courses
-app.get('/students', (req, res) => {
-    res.render('students', { title: 'Students' });
-});
-
-// CRUD routes
-// Create a course
-app.post('/courses', (req, res) => {
-    const course = new Course(req.body);
-    course.cname = course.cname.toUpperCase();
-
-    course.save()
-        .then((result) => {
-            res.redirect('/courses');
-        })
-        .catch((err) => {
-            console.log(err);
-        });
-});
-
-// Update a course
-app.post('/courses/:id', (req, res) => { 
-    const id = req.params.id;
-    Course.updateOne({ _id: id }, { cname: req.body.cname, cdescript: req.body.cdescript, sarea: req.body.sarea, chours: req.body.chours })
-        .then((result) => {
-            res.redirect('/courses');
-        })
-        .catch((err) => {
-            console.log(err);
-            res.status(404).render('404', { title: '404' });
-        });
-});
-
-// Delete a course
-app.delete('/courses/:id', (req, res) => {
-    const id = req.params.id;
-
-    Course.findByIdAndDelete(id)
-        .then(result => {
-            res.json({ redirect: '/courses' });
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(404).render('404', { title: '404' });
-        });
-});
+app.use('/courses', courseRoutes);
+//app.use('/staff', staffRoutes);
 
 // 404 Page, default route for any uncaught requests
 app.use((req, res) => {
