@@ -26,5 +26,17 @@ const studentSchema = new Schema({
 
 }, { timestamps: true });
 
+// Fire function after doc is saved to database
+studentSchema.post('save', function (doc, next) {
+    console.log('New user was created and saved.', doc);
+    next();
+});
+
+// Fire function before doc is saved to database
+studentSchema.pre('save', function (next) {
+    console.log('User is about to be created and saved', this);
+    next();
+});
+
 const Student = mongoose.model('student', studentSchema);
 module.exports = Student;

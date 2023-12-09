@@ -1,5 +1,5 @@
-const Teacher = require('../models/teacher');
-const Student = require('../models/student');
+const Teacher = require('../models/Teacher');
+const Student = require('../models/Student');
 const jwt = require('jsonwebtoken');
 
 // handle errors
@@ -21,7 +21,7 @@ const handleErrors = (err) => {
     };
 
     if (err.message.includes('incorrect email')){
-        errors.email = 'That email is not registered';
+        errors.userName = 'That email is not registered';
     }
     
     if (err.message.includes('incorrect password')){
@@ -53,8 +53,8 @@ module.exports.signup_post = async (req, res) => {
     const { firstName, lastName, userName, password } = req.body;
     
     try {
-        const user = await user.create({ firstName, lastName, userName, password });
-        res.status(201).json(user);
+        const student = await Student.create({ firstName, lastName, userName, password });
+        res.status(201).json(student);
     }
     catch (err) {
         const errors = handleErrors(err);
