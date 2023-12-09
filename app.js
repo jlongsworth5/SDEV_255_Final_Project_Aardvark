@@ -10,7 +10,7 @@ const courseRoutes = require('./routes/courseRoutes');
 // DB Models
 const Course = require('./models/course');
 const Registration = require('./models/registration');
-const Student = require('./models/student');
+const User = require('./models/user');
 const Subject = require('./models/subject');
 
 // Get config settings

@@ -1,5 +1,5 @@
 const Teacher = require('../models/teacher');
-const Student = require('../models/student');
+const Student = require('../models/user');
 const jwt = require('jsonwebtoken');
 
 // handle errors
