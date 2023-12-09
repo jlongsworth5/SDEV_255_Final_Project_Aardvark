@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const registrationSchema = new Schema({
-    studentId: {
+    userId: {
         type: ObjectId,
         required: true,
     },

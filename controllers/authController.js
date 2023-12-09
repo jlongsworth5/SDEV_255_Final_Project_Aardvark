@@ -1,11 +1,10 @@
-const Teacher = require('../models/Teacher');
-const Student = require('../models/Student');
+const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 
 // handle errors
 const handleErrors = (err) => {
     console.log(err.message, err.code);
-    let errors = { firstName: '', lastName: '', userName: '', password: '' };
+    let errors = { firstName: '', lastName: '', email: '', password: '' };
 
     // duplicate error code
     if (err.code === 11000) {
@@ -21,7 +20,7 @@ const handleErrors = (err) => {
     };
 
     if (err.message.includes('incorrect email')){
-        errors.userName = 'That email is not registered';
+        errors.email = 'That email is not registered';
     }
     
     if (err.message.includes('incorrect password')){
@@ -50,11 +49,11 @@ module.exports.login_get = (req, res) => {
 };
 
 module.exports.signup_post = async (req, res) => {
-    const { firstName, lastName, userName, password } = req.body;
+    const { firstName, lastName, email, password, isTeacher } = req.body;
     
     try {
-        const student = await Student.create({ firstName, lastName, userName, password });
-        res.status(201).json(student);
+        const user = await User.create({ firstName, lastName, email, password, isTeacher });
+        res.status(201).json(user);
     }
     catch (err) {
         const errors = handleErrors(err);
@@ -63,7 +62,7 @@ module.exports.signup_post = async (req, res) => {
 };
 
 module.exports.login_post = async (req, res) => {
-    const { userName, password } = req.body;
+    const { email, password } = req.body;
     
     console.log(email,password);
     res.render('user login');
