@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-const { default: isEmail } = require('validator/lib/isEmail');
+const { isEmail } = require('validator');
+const bcrypt = require('bcrypt');
 const Schema = mongoose.Schema;
 
 const studentSchema = new Schema({
@@ -33,8 +34,9 @@ studentSchema.post('save', function (doc, next) {
 });
 
 // Fire function before doc is saved to database
-studentSchema.pre('save', function (next) {
-    console.log('User is about to be created and saved', this);
+studentSchema.pre('save', async function (next) {
+    const salt = await bcrypt.genSalt();
+    this.password = await bcrypt.hash(this.password, salt);
     next();
 });
 
