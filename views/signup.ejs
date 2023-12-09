@@ -4,7 +4,76 @@
         
         <%- include('./partials/navbar.ejs') %>
 
-        <h1>Sign Up</h1>
+        <main class="content">
+
+            <section id="signup">
+                <div class="signup-section">
+                    <form>
+                        <h2>Sign Up</h2>
+                        
+                        <div class="row">
+                            <div class="label-col">
+                                <label for="firstname">First Name</label>
+                            </div>
+                            <div class="input-col">
+                                <input type="text" id="firstname" name="firstname" placeholder="First name..." required />
+                                <div class="first name error"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="label-col">
+                                <label for="lastname">Last Name</label>
+                            </div>
+                            <div class="input-col">
+                                <input type="text" id="lastname" name="lastname" placeholder="Last name..." required />
+                                <div class="last name error"></div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="label-col">
+                                <label for="email">Email</label>
+                            </div>
+                            <div class="input-col">
+                                <input type="text" id="email" name="email" placeholder="Email..." required />
+                                <div class="email error"></div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="label-col">
+                                <label for="password">Password</label>
+                            </div>
+                            <div class="input-col">
+                                <input type="password" id="password" name="password" placeholder="Minimum 6 character password..." required />
+                                <div class="password error"></div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <button>Sign Up</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </main>
+
+        <script>
+            const form = document.querySelector('form');
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                // Get values from the form
+                const firstname = form.firstname.value;
+                const lastname = form.lastname.value;
+                const email = form.email.value;
+                const password = form.password.value;
+
+                console.log(firstname, lastname, email, password);
+            })
+        </script>
 
         <%- include('./partials/footer.ejs') %>
         

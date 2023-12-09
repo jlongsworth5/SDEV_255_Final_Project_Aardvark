@@ -1,5 +1,59 @@
-<%- include("./partials/head.ejs") %>
+<html lang="en">
+    <%- include('./partials/head.ejs') %>
+    <body>
+        
+        <%- include('./partials/navbar.ejs') %>
 
-<h1>Log In</h1>
+        <main class="content">
 
-<%- include("./partials/footer.ejs") %>
+            <section id="login">
+                <div class="login-section">
+                    <form>
+                        <h2>Log In</h2>
+
+                        <div class="row">
+                            <div class="label-col">
+                                <label for="email">Email</label>
+                            </div>
+                            <div class="input-col">
+                                <input type="text" id="email" name="email" placeholder="Email..." required />
+                                <div class="email error"></div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="label-col">
+                                <label for="password">Password</label>
+                            </div>
+                            <div class="input-col">
+                                <input type="password" id="password" name="password" placeholder="Minimum 6 character password..." required />
+                                <div class="password error"></div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <button>Log In</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </main>
+
+        <script>
+            const form = document.querySelector('form');
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                // Get values from the form
+                const email = form.email.value;
+                const password = form.password.value;
+
+                console.log(firstname, lastname, email, password);
+            })
+        </script>
+
+        <%- include('./partials/footer.ejs') %>
+        
+    </body>
+</html>
