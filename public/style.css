@@ -150,7 +150,14 @@ p, main ul {
   border-bottom: none;
 }
 
-#add-class, #delete-class, #modify-class {
+#signup, #login {
+  color: #878787;
+  margin: 20px 0 20px 0;
+  border-top: none;
+  border-bottom: none;
+}
+
+#add-class, #delete-class, #modify-class, #signup, #login {
   color: #878787;
   width: 90%;
 }
@@ -217,7 +224,7 @@ p, main ul {
   border-left: 6px solid #ac5633;
 }
 
-#welcome, #about-us, #contact, #sign-up, #signup-btn, #courses-offered, #course-list, #modify, #add-class, #delete-class, #modify-class {
+#welcome, #about-us, #contact, #signup, #login, #sign-up, #signup-btn, #courses-offered, #course-list, #modify, #add-class, #delete-class, #modify-class {
   background-color: #303030;
   padding: 30px;
   width: 80%;
@@ -237,7 +244,7 @@ form * {
   box-sizing: border-box;
 }
 
-input[type=text], select, textarea {
+input[type=text], input[type=password], select, textarea {
   width: 100%;
   padding: 10px;
   border: 1px solid #202020;
@@ -251,12 +258,12 @@ textarea {
   resize: none;
 }
 
-input[type=text]:focus, textarea:focus {
+input[type=text]:focus, input[type=password]:focus, textarea:focus {
   background-color: #ac5633;
   color: #fff;
 }
 
-input[type=text]:focus::placeholder, textarea:focus::placeholder {
+input[type=text]:focus::placeholder, input[type=password]:focus::placeholder, textarea:focus::placeholder {
   color: #fff;
 }
 
@@ -269,7 +276,7 @@ label {
   display: inline-block;
 }
 
-input[type=submit], input[type=button] {
+input[type=submit], input[type=button], button {
   background-color: #cb8c2f;
   color: #202020;
   padding: 12px 20px;
@@ -280,11 +287,11 @@ input[type=submit], input[type=button] {
   font-family: 'Josefin Sans', sans-serif;
 }
 
-input[type=submit]:hover, input[type=button]:hover {
+input[type=submit]:hover, input[type=button]:hover, button:hover {
   background-color: #ac5633;
 }
 
-.add-section, .delete-section, .modify-section {
+.add-section, .delete-section, .modify-section, .signup-section, .login-section {
   border-radius: 5px;
   background-color: #303030;
   padding: 20px;

@@ -1,25 +1,25 @@
-const { Int32 } = require('bson');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const courseSchema = new Schema({
-    cname: {
+const teacherSchema = new Schema({
+    firstName: {
         type: String,
         required: true,
     },
-    cdescript: {
+    lastName: {
         type: String,
         required: true,
     },
-    sarea: {
+    userName: {
         type: String,
-        required: true,   
+        required: true,
     },
-    chours: {
-        type: Number,
+    password: {
+        type: String,
         required: true,
     }
+
 }, { timestamps: true });
 
-const Course = mongoose.model('Course', courseSchema);
-module.exports = Course;
+const Teacher = mongoose.model('Teacher', teacherSchema);
+module.exports = Teacher;
