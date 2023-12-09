@@ -85,11 +85,12 @@
                 const email = form.email.value;
                 const password = form.password.value;
                 const checked = form.isTeacher.value;
+
                 let isTeacher = false;
                 if (checked === 'on') {
                     isTeacher = true;
                 }
-                console.log("Is a teacher?   " + isTeacher);
+
                 try {
                     const res = await fetch('/signup', {
                         method: 'POST',
@@ -97,7 +98,7 @@
                         headers: { 'Content-Type': 'application/json' }
                     });
                     const data = await res.json();
-                    console.log(data);
+                    console.log(data.errors);
                     if(data.errors) {
                         firstNameError.textContent = data.errors.firstName;
                         lastNameError.textContent = data.errors.lastName;

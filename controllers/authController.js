@@ -13,7 +13,7 @@ const handleErrors = (err) => {
     };
 
     // validation errors
-    if (err.message.includes('user validation failed')){
+    if (err.message.includes('User validation failed')){
         Object.values(err.errors).forEach(({properties}) => {
             errors[properties.path] = properties.message;
         });
@@ -53,7 +53,9 @@ module.exports.signup_post = async (req, res) => {
     
     try {
         const user = await User.create({ firstName, lastName, email, password, isTeacher });
-        res.status(201).json(user);
+        const token = createToken(user._id);
+        res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
+        res.status(201).json({ user: user._id });
     }
     catch (err) {
         const errors = handleErrors(err);
