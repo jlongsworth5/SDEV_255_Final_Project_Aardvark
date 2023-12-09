@@ -16,8 +16,8 @@
                                 <label for="firstname">First Name</label>
                             </div>
                             <div class="input-col">
-                                <input type="text" id="firstname" name="firstname" placeholder="First name..." required />
-                                <div class="first name error"></div>
+                                <input type="text" id="firstName" name="firstName" placeholder="First name..." required />
+                                <div class="firstname error"></div>
                             </div>
                         </div>
                         
@@ -26,8 +26,8 @@
                                 <label for="lastname">Last Name</label>
                             </div>
                             <div class="input-col">
-                                <input type="text" id="lastname" name="lastname" placeholder="Last name..." required />
-                                <div class="last name error"></div>
+                                <input type="text" id="lastName" name="lastName" placeholder="Last name..." required />
+                                <div class="lastname error"></div>
                             </div>
                         </div>
 
@@ -52,6 +52,10 @@
                         </div>
                         <br>
                         <div class="row">
+                            <div>
+                                <label for="teacher">Are you a teacher?</label>
+                                <input type="checkbox" id="isTeacher" name="isTeacher" />
+                            </div>
                             <button>Sign Up</button>
                         </div>
                     </form>
@@ -61,17 +65,54 @@
 
         <script>
             const form = document.querySelector('form');
+            const firstNameError = document.querySelector('.firstname.error');
+            const lastNameError = document.querySelector('.lastname.error');
+            const emailError = document.querySelector('.email.error');
+            const passwordError = document.querySelector('.password.error');
 
-            form.addEventListener('submit', (e) => {
+            form.addEventListener('submit', async (e) => {
                 e.preventDefault();
 
+                // reset existing errors
+                firstNameError.textContent = '';
+                lastNameError.textContent = '';
+                emailError.textContent = '';
+                passwordError.textContent = '';
+
                 // Get values from the form
-                const firstname = form.firstname.value;
-                const lastname = form.lastname.value;
+                const firstName = form.firstName.value;
+                const lastName = form.lastName.value;
                 const email = form.email.value;
                 const password = form.password.value;
+                const checked = form.isTeacher.value;
 
-                console.log(firstname, lastname, email, password);
+                let isTeacher = false;
+                if (checked === 'on') {
+                    isTeacher = true;
+                }
+
+                try {
+                    const res = await fetch('/signup', {
+                        method: 'POST',
+                        body: JSON.stringify({ firstName, lastName, email, password, isTeacher }),
+                        headers: { 'Content-Type': 'application/json' }
+                    });
+                    const data = await res.json();
+                    console.log(data.errors);
+                    if(data.errors) {
+                        firstNameError.textContent = data.errors.firstName;
+                        lastNameError.textContent = data.errors.lastName;
+                        emailError.textContent = data.errors.email;
+                        passwordError.textContent = data.errors.password;
+                    }
+
+                    if(data.user) {
+                        location.assign('/');
+                    }
+                }
+                catch (err) {
+                    console.log(err);
+                }
             })
         </script>
 

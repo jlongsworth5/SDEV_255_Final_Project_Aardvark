@@ -1,4 +1,5 @@
 const { Int32 } = require('bson');
+const { ObjectId } = require('bson');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
@@ -18,6 +19,10 @@ const courseSchema = new Schema({
     chours: {
         type: Number,
         required: true,
+    },
+    TeacherId: {
+        type: ObjectId,
+        required: true
     }
 }, { timestamps: true });
 

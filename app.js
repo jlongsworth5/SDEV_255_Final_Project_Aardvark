@@ -11,7 +11,7 @@ const courseRoutes = require('./routes/courseRoutes');
 // DB Models
 const Course = require('./models/Course');
 const Registration = require('./models/Registration');
-const Student = require('./models/Student');
+const User = require('./models/User');
 const Subject = require('./models/Subject');
 
 // Get config settings
@@ -90,7 +90,6 @@ app.get('/staff', (req, res) => {
 
 app.use('/courses', courseRoutes);
 app.use(authRoutes);
-//app.use('/staff', staffRoutes);
 
 // 404 Page, default route for any uncaught requests
 app.use((req, res) => {
