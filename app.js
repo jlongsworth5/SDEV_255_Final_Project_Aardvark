@@ -3,17 +3,19 @@ const express = require('express');     //  Used for simplified code expressions
 const mongoose = require('mongoose');   //  Used to access the cloud db
 const morgan = require('morgan');       //  Used to log requests and responses in the terminal when running in development environment
 const { render } = require('ejs');      //  Used to embed javascript in the html
-const cookieParser = require('cookie-parser')   //  Used to read cookies
-const authRoutes = require('./routes/authRoutes');     
-const { requireAuth, checkUser } = require('./middleware/authMiddleware');
+const cookieParser = require('cookie-parser')   //  Used to read cookies    
+
+// Declare authorization middleware
+const { checkUser, requireTeacher, requireStudent } = require('./middleware/authMiddleware');
 
 // Import Routers
+const authRoutes = require('./routes/authRoutes'); 
 const courseRoutes = require('./routes/courseRoutes');
+const staffRoutes = require('./routes/staffRoutes');
+const studentRoutes = require('./routes/studentRoutes');
 
 // DB Models
 const Course = require('./models/Course');
-const Registration = require('./models/Registration');
-const User = require('./models/User');
 const Subject = require('./models/Subject');
 
 // Get config settings
@@ -66,33 +68,15 @@ app.get('/update/:id', (req, res) => {
 });
 
 //  Page for students to register for courses
-app.get('/students', requireAuth, (req, res) => {
-    res.render('students', { title: 'Students' });
-});
+app.use('/students', requireStudent, studentRoutes);
 
 // Page for staff to add and modify courses
-app.get('/staff', (req, res) => {
-    let subjects = {};
+app.use('/staff', requireTeacher, staffRoutes);
 
-    Subject.find().sort({ title: 1 })
-        .then(sResult => {
-            subjects = sResult;            
-        })
-        .then(() => {
-            Course.find().sort({ cname: 1 })
-                .then((cResult) => {                    
-                    res.render('staff', {courses: cResult, subjects: subjects, title: 'Staff' });
-                })
-                .catch((err) => {
-                    console.log(err);
-                });
-            })                
-        .catch((err) => {
-            console.log(err);
-        });
-});
-
+// Course CRUD routes
 app.use('/courses', courseRoutes);
+
+// Signup/Login
 app.use(authRoutes);
 
 // 404 Page, default route for any uncaught requests

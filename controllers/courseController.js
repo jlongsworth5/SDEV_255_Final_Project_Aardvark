@@ -1,5 +1,4 @@
 const Course = require('../models/Course');
-const Subject = require('../models/Subject');
 
 module.exports.course_index = (req, res) => {
     Course.find().sort({ cname: 1 })
