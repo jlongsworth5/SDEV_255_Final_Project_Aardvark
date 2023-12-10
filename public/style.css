@@ -126,7 +126,7 @@ h3 {
   color: #878787
 }
 
-p, main ul {
+p, main ul, .hide-select {
   color: #999;
 }
 
@@ -140,24 +140,39 @@ p, main ul {
   font-size: 2em;
 }
 
-#welcome, #courses-offered, #sign-up, #modify {
+#hide-div {
+  padding: 30px;
+  background-color: #303030;
+}
+
+#hidden, #courses-offered, #hide-form {
+  width: 85%;
+  border-top: none;
+  border-bottom: none;
+}
+
+#courses-offered {
+  margin: 20px 0 0 0;
+}
+
+#welcome, #sign-up, #modify {
   margin: 20px 0 0 0;
   border-top: none;
 }
 
-#contact, #course-list, #signup-btn {
+#contact, #course-list, #signup-btn, #modify-class, #hidden {
   margin: 0 0 20px 0;
   border-bottom: none;
 }
 
-#signup, #login {
+#signup, #login, #course-detail {
   color: #878787;
   margin: 20px 0 20px 0;
   border-top: none;
   border-bottom: none;
 }
 
-#add-class, #delete-class, #modify-class, #signup, #login {
+#add-class, #delete-class, #modify-class, #signup, #login, .hide-select {
   color: #878787;
   width: 90%;
 }
@@ -224,13 +239,13 @@ p, main ul {
   border-left: 6px solid #ac5633;
 }
 
-#welcome, #about-us, #contact, #signup, #login, #sign-up, #signup-btn, #courses-offered, #course-list, #modify, #add-class, #delete-class, #modify-class {
+#welcome, #about-us, #contact, #signup, #login, #hidden, #sign-up, #signup-btn, #courses-offered, #course-detail, #course-list, #modify, #add-class, #delete-class, #modify-class {
   background-color: #303030;
   padding: 30px;
   width: 80%;
 }
 
-#welcome p, #about-us p, #contact p, #sign-up p, #courses-offered p, #modify p {
+#welcome p, #about-us p, #contact p, #sign-up p, #courses-offered p, #course-detail p, #modify p, #hidden p {
   padding: 0 20px;
   line-height:1.35;
 }
@@ -291,14 +306,14 @@ input[type=submit]:hover, input[type=button]:hover, button:hover {
   background-color: #ac5633;
 }
 
-.add-section, .delete-section, .modify-section, .signup-section, .login-section {
+.add-section, .delete-section, .modify-section, .signup-section, .login-section, .hide-select, #hide-div {
   border-radius: 5px;
   background-color: #303030;
   padding: 20px;
   width: 90%;
 }
 
-#delete-button {
+#delete-button, #drop-button {
   margin-left: 10px;
 }
 

@@ -8,20 +8,63 @@
 
     <section id="sign-up">
       <div class="section-inner">
-        <h1>Sign Up For Courses</h1>
+        <h1>Modify Your Schedule</h1>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur voluptatum maxime beatae qui quod. Amet minus accusantium nesciunt provident, sint tempore ratione aliquam sed harum labore possimus sit laudantium nisi. Lorem ipsum dolor sit amet consectetur adipisicing elit. Est accusantium sint praesentium numquam inventore et autem corporis reprehenderit accusamus necessitatibus nisi dicta non, perferendis rem fugit animi distinctio, aspernatur nesciunt?</p>
       </div>
     </section>
 
     <section id="signup-btn">
       <div class="section-inner">
-        <button type="button" class="block">Add/Drop Classes</button> 
+        <button type="button" class="block" onclick="hideFunction()">Add/Drop Classes</button> 
       </div>
     </section>  
+
+    <section id="hidden" style="display:none">
+      <div id="hide-div">
+        <h2>Add or Drop Courses</h2>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veniam repudiandae laborum corporis eaque 
+          necessitatibus eum, perferendis at distinctio laudantium delectus tenetur, quas eius sint deleniti 
+          reprehenderit culpa repellendus! Totam, ratione. Lorem ipsum dolor, sit amet consectetur adipisicing 
+          elit. Dolore nisi cupiditate reiciendis eligendi ipsum corrupti id, asperiores ipsam laboriosam quis 
+          expedita nobis sed alias, nihil enim provident sit ut nemo?</p>
+      
+          <div class="hide-select">
+            <div class="row">
+              <div class="label-col">
+              <label for="add-drop-select">Select a Course:</label>
+              </div>
+              <div class="input-col">
+                <select id="add-drop-select">
+                  <option value="">-- Please choose an option --</option>
+                  <option value="class-one">Class 1</option>
+                  <option value="class-two">Class 2</option>
+                  <option value="class-three">Class 3</option>
+                </select>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <input type="button" value="Drop Class" id="drop-button">
+              <input type="submit" value="Add Class ">
+            </div>
+          </div>
+      </div>
+    </section>
 
   </main>
   <%- include("./partials/footer.ejs") %>
 
+  <script>
+    // Function to hide the add/drop section
+    function hideFunction() {
+      var x = document.getElementById("hidden"),
+      displayValue = "";
+      if (x.style.display == "")
+      displayValue = "none";
+
+      x.style.display = displayValue;
+    }
+  </script>
 </body>
 
 </html>
