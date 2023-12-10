@@ -6,17 +6,16 @@ const { render } = require('ejs');      //  Used to embed javascript in the html
 const cookieParser = require('cookie-parser')   //  Used to read cookies    
 
 // Declare authorization middleware
-const { requireAuth, checkUser } = require('./middleware/authMiddleware');
+const { checkUser, requireTeacher, requireStudent } = require('./middleware/authMiddleware');
 
 // Import Routers
 const authRoutes = require('./routes/authRoutes'); 
 const courseRoutes = require('./routes/courseRoutes');
 const staffRoutes = require('./routes/staffRoutes');
+const studentRoutes = require('./routes/studentRoutes');
 
 // DB Models
 const Course = require('./models/Course');
-const Registration = require('./models/Registration');
-const User = require('./models/User');
 const Subject = require('./models/Subject');
 
 // Get config settings
@@ -69,12 +68,10 @@ app.get('/update/:id', (req, res) => {
 });
 
 //  Page for students to register for courses
-app.get('/students', requireAuth, (req, res) => {
-    res.render('students', { title: 'Students' });
-});
+app.use('/students', requireStudent, studentRoutes);
 
 // Page for staff to add and modify courses
-app.use('/staff', staffRoutes);
+app.use('/staff', requireTeacher, staffRoutes);
 
 // Course CRUD routes
 app.use('/courses', courseRoutes);
