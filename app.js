@@ -3,7 +3,9 @@ const express = require('express');     //  Used for simplified code expressions
 const mongoose = require('mongoose');   //  Used to access the cloud db
 const morgan = require('morgan');       //  Used to log requests and responses in the terminal when running in development environment
 const { render } = require('ejs');      //  Used to embed javascript in the html
-const authRoutes = require('./routes/authRoutes');      
+const cookieParser = require('cookie-parser')   //  Used to read cookies
+const authRoutes = require('./routes/authRoutes');     
+const { requireAuth, checkUser } = require('./middleware/authMiddleware');
 
 // Import Routers
 const courseRoutes = require('./routes/courseRoutes');
@@ -23,6 +25,7 @@ app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(morgan('dev'));
+app.use(cookieParser());
 app.set('view engine', 'ejs');
 
 // Connect to MongoDB
@@ -33,6 +36,7 @@ mongoose.connect(dbUri)
 
 // Route requests to appropriate pages
 //  Home page
+app.get('*', checkUser);
 app.get('/', (req, res) => {
     res.render('index', { title: 'Home' })
 });
@@ -62,7 +66,7 @@ app.get('/update/:id', (req, res) => {
 });
 
 //  Page for students to register for courses
-app.get('/students', (req, res) => {
+app.get('/students', requireAuth, (req, res) => {
     res.render('students', { title: 'Students' });
 });
 
