@@ -9,7 +9,7 @@ const requireAuth = (req, res, next) => {
         jwt.verify(token, 'aardvarkValleyInstitute', (err, decodedToken) => {
             if(err){
                 console.log(err.message);
-                res.redirect('');
+                res.redirect('/login');
             }
             else {
                 console.log(decodedToken);
@@ -47,20 +47,21 @@ const checkUser = (req, res, next) => {
     }
 };
 
-const checkTeacher = (req, res, next) => {
+const requireTeacher = (req, res, next) => {
     const token = req.cookies.jwt;
 
+    // check json web token exists and is valid
     if(token) {
         jwt.verify(token, 'aardvarkValleyInstitute', async (err, decodedToken) => {
             if(err) {
                 console.log(err.message);
-                res.locals.user = null;
-                next();
+                res.redirect('/login');
             }
             else {
-                console.log(decodedToken);
+                // check if the user is a teacher
                 let user = await User.findById(decodedToken.id);
-                if (user.isTeacher) {
+                if (user.isTeacher) {                    
+                    console.log(decodedToken);
                     res.locals.user = user;
                     next();
                 }
@@ -71,10 +72,9 @@ const checkTeacher = (req, res, next) => {
         })
     }
     else {
-        res.locals.user = null;
-        next();
+        res.redirect('/login');
     }
 
 }
 
-module.exports = { requireAuth, checkUser, checkTeacher }
+module.exports = { requireAuth, checkUser, requireTeacher }

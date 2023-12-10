@@ -6,7 +6,7 @@ const { render } = require('ejs');      //  Used to embed javascript in the html
 const cookieParser = require('cookie-parser')   //  Used to read cookies    
 
 // Declare authorization middleware
-const { requireAuth, checkUser, checkTeacher } = require('./middleware/authMiddleware');
+const { requireAuth, checkUser } = require('./middleware/authMiddleware');
 
 // Import Routers
 const authRoutes = require('./routes/authRoutes'); 
@@ -76,7 +76,10 @@ app.get('/students', requireAuth, (req, res) => {
 // Page for staff to add and modify courses
 app.use('/staff', staffRoutes);
 
+// Course CRUD routes
 app.use('/courses', courseRoutes);
+
+// Signup/Login
 app.use(authRoutes);
 
 // 404 Page, default route for any uncaught requests
