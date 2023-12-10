@@ -8,20 +8,42 @@
 
     <section id="sign-up">
       <div class="section-inner">
-        <h1>Sign Up For Courses</h1>
+        <h1>Modify Your Schedule</h1>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur voluptatum maxime beatae qui quod. Amet minus accusantium nesciunt provident, sint tempore ratione aliquam sed harum labore possimus sit laudantium nisi. Lorem ipsum dolor sit amet consectetur adipisicing elit. Est accusantium sint praesentium numquam inventore et autem corporis reprehenderit accusamus necessitatibus nisi dicta non, perferendis rem fugit animi distinctio, aspernatur nesciunt?</p>
       </div>
     </section>
 
     <section id="signup-btn">
       <div class="section-inner">
-        <button type="button" class="block">Add/Drop Classes</button> 
+        <button type="button" class="block" onclick="hideFunction()">Add/Drop Classes</button> 
       </div>
     </section>  
+
+    <section id="hidden">
+      <div id="hide-div" class="hide-section" style="display:none">
+        <h2>Add or Drop Courses</h2>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veniam repudiandae laborum corporis eaque 
+          necessitatibus eum, perferendis at distinctio laudantium delectus tenetur, quas eius sint deleniti 
+          reprehenderit culpa repellendus! Totam, ratione. Lorem ipsum dolor, sit amet consectetur adipisicing 
+          elit. Dolore nisi cupiditate reiciendis eligendi ipsum corrupti id, asperiores ipsam laboriosam quis 
+          expedita nobis sed alias, nihil enim provident sit ut nemo?</p>
+      </div>
+    </section>
 
   </main>
   <%- include("./partials/footer.ejs") %>
 
+  <script>
+    // Function to hide the add/drop section
+    function hideFunction() {
+      var x = document.getElementById("hide-div"),
+      displayValue = "";
+      if (x.style.display == "")
+      displayValue = "none";
+
+      x.style.display = displayValue;
+    }
+  </script>
 </body>
 
 </html>

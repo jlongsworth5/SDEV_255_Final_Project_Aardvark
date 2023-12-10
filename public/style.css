@@ -140,12 +140,23 @@ p, main ul {
   font-size: 2em;
 }
 
+#hide-div {
+  padding: 30px;
+  background-color: #303030;
+}
+
+#hidden {
+  width: 85%;
+  border-top: none;
+  border-bottom: none;
+}
+
 #welcome, #courses-offered, #sign-up, #modify {
   margin: 20px 0 0 0;
   border-top: none;
 }
 
-#contact, #course-list, #signup-btn {
+#contact, #course-list, #signup-btn, #modify-class {
   margin: 0 0 20px 0;
   border-bottom: none;
 }
@@ -230,7 +241,7 @@ p, main ul {
   width: 80%;
 }
 
-#welcome p, #about-us p, #contact p, #sign-up p, #courses-offered p, #modify p {
+#welcome p, #about-us p, #contact p, #sign-up p, #courses-offered p, #modify p, #hidden p {
   padding: 0 20px;
   line-height:1.35;
 }
