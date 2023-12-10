@@ -60,8 +60,13 @@ const checkTeacher = (req, res, next) => {
             else {
                 console.log(decodedToken);
                 let user = await User.findById(decodedToken.id);
-                res.locals.user = user;
-                next();
+                if (user.isTeacher) {
+                    res.locals.user = user;
+                    next();
+                }
+                else {
+                    res.redirect('/');
+                }
             }
         })
     }
@@ -72,4 +77,4 @@ const checkTeacher = (req, res, next) => {
 
 }
 
-module.exports = { requireAuth, checkUser }
+module.exports = { requireAuth, checkUser, checkTeacher }
