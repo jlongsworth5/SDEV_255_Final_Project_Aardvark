@@ -19,10 +19,6 @@ const courseSchema = new Schema({
     chours: {
         type: Number,
         required: true,
-    },
-    TeacherId: {
-        type: ObjectId,
-        required: true
     }
 }, { timestamps: true });
 
