@@ -6,7 +6,7 @@ const registrationSchema = new Schema({
         type: String,
         required: true,
     },
-    courseId: {
+    course: {
         type: String,
         required: true,
     }
