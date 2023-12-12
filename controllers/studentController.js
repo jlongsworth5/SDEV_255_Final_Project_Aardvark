@@ -2,6 +2,17 @@ const jwt = require('jsonwebtoken');
 const Registration = require('../models/Registration');
 const Course = require('../models/Course');
 
+const handleErrors = (err) => {
+    console.log(err.message, err.code);
+    let errors = { course: '' }
+    
+    // duplicate error code
+    if(err.code === 11000) {
+        errors.course = "You have already registered for this course";
+        return errors;
+    }
+}
+
 module.exports.student_index = async (req, res) => {
     let registrations = {};
     let userId = getUser(req);
@@ -26,13 +37,14 @@ module.exports.student_index = async (req, res) => {
 
 module.exports.registration_create_post = (req, res) => {
     const registration = new Registration(req.body);
-
+    
     registration.save()
         .then((result) => {
-            res.redirect('/students');
+            res.status(201).json({ result });
         })
         .catch(err => {
-            console.log(err);
+            const errors = handleErrors(err);
+            res.status(404).json({ errors });
         });    
 };
 
