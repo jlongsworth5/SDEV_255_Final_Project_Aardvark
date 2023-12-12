@@ -1,15 +1,20 @@
+const { ObjectId } = require('bson');
 const Registration = require('../models/Registration');
 const Course = require('../models/Course');
 const User = require('../models/User');
 
 module.exports.student_index = (req, res) => {
-    res.render('students', { title: 'Students' });
+    Course.find().sort({ cname: 1 })
+    .then((result) => {
+        res.render('students', {courses: result, title: 'Students' });
+    })
+    .catch((err) => {
+        console.log(err);
+    });
 };
 
 module.exports.registration_create_post = (req, res) => {
-    const userId = req.params.userId;
-    const courseId = req.params.courseId;
-    const registration = new Registration(userId, courseId);
+    const registration = new Registration(req.body);
     
     registration.save()
         .then((result) => {
@@ -17,18 +22,6 @@ module.exports.registration_create_post = (req, res) => {
         })
         .catch(err => {
             console.log(err);
-        });
-};
-
-module.exports.registration_update_post = (req, res) => {
-    const id = req.params.id;
-    Registration.updateOne({ _id: id }, { courseId: req.body.courseId })
-        .then((result) => {
-            res.redirect('/students');
-        })
-        .catch((err) => {
-            console.log(err);
-            res.status(404).render('404', { title: '404' });
         });
 };
 
