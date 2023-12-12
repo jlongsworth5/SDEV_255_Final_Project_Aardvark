@@ -13,6 +13,20 @@
       </div>
     </section>
 
+    <section id="your-course-list">
+      <div class="section-inner">
+        <h2 class="courses">Your Current Schedule</h2>
+
+        <% if (registrations.length > 0) { %>
+          <% registrations.forEach(registration => { %>
+            <h3><span class="course-title"><%= registration.course %></span></h3>                               
+          <% }) %>
+        <% } else { %>
+            <p>There are no courses to display...</p>
+        <% } %>
+      </div>
+    </section>
+
     <section id="signup-btn">
       <div class="section-inner">
         <button type="button" class="block" onclick="hideFunction()">Add/Drop Classes</button> 
@@ -31,10 +45,11 @@
           <div class="hide-select">
             <div class="row">
               <div class="label-col">
-              <label for="add-drop-select">Select a Course:</label>
+              <label for="add-drop-select">Add courses:</label>
               </div>
               <div class="input-col">
                 <select id="add-drop-select">
+                  <option value="">-- Choose a subject --</option>
                   <% if (courses.length > 0) { %>
                     <% courses.forEach(course => { %>
                       <option value="<%= course.cname %>"><%= course.cname %></option>                                
@@ -48,7 +63,9 @@
             </div>
             <br>
             <div class="row">
-              <input type="button" class="add" value="Add Class " id="add-button" data-doc="<%= user._id %>">
+              <a onClick="window.location.reload()">
+                <input type="button" class="add" value="Add Class " id="add-button" data-doc="<%= user._id %>">
+              </a>
             </div>
           </div>
           <div class="hide-select">
@@ -58,6 +75,7 @@
               </div>
               <div class="input-col">
                 <select id="drop-select">
+                  <option value="">-- Choose a subject --</option>
                   <% if (registrations.length > 0) { %>
                     <% registrations.forEach(registration => { %>
                       <option value="<%= registration._id %>"><%= registration.course %></option>                                
