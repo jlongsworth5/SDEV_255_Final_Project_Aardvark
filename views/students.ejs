@@ -35,26 +35,84 @@
               </div>
               <div class="input-col">
                 <select id="add-drop-select">
-                  <option value="">-- Please choose an option --</option>
-                  <option value="class-one">Class 1</option>
-                  <option value="class-two">Class 2</option>
-                  <option value="class-three">Class 3</option>
+                  <% if (courses.length > 0) { %>
+                    <% courses.forEach(course => { %>
+                      <option value="<%= course.cname %>"><%= course.cname %></option>                                
+                    <% }) %>
+                  <% } else { %>
+                    <p>There are no courses to select.</p>                              
+                  <% } %>
                 </select>
               </div>
             </div>
             <br>
             <div class="row">
-              <input type="button" value="Drop Class" id="drop-button">
-              <input type="submit" value="Add Class ">
+              <input type="button" class="add" value="Add Class " id="add-button" data-doc="<%= user._id %>">
+            </div>
+          </div>
+          <div class="hide-select">
+            <div class="row">
+              <div class="label-col">
+                <label for="drop-select">Drop courses:</label>
+              </div>
+              <div class="input-col">
+                <select id="drop-select">
+                  <% if (registrations.length > 0) { %>
+                    <% registrations.forEach(registration => { %>
+                      <option value="<%= registration._id %>"><%= registration.course %></option>                                
+                    <% }) %>
+                  <% } else { %>
+                    <p>There are no courses to select.</p>                              
+                  <% } %>
+                </select>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <input type="button" class="drop" value="Drop Class" id="drop-button">
             </div>
           </div>
       </div>
     </section>
-
+    
   </main>
   <%- include("./partials/footer.ejs") %>
 
   <script>
+    const addButton = document.querySelector('input.add');
+    const dropButton = document.querySelector('input.drop');
+
+    // Add class to student's schedule
+    addButton.addEventListener('click', (e) => {
+      const courseSelect = document.getElementById('add-drop-select');
+      const userId = addButton.dataset.doc;
+      let course = GetSelectedOption(courseSelect);
+      try {
+        const res = fetch('/students', {
+          method: 'POST',
+          body: JSON.stringify({ userId, course }),
+          headers: { 'Content-Type': 'application/json' }
+        });
+      } 
+      catch (err) {
+        console.log(err);
+      }
+    });
+
+    // Drop class from a student's schedule
+    dropButton.addEventListener('click', async (e) => {      
+      const dropSelect = document.getElementById('drop-select');
+      let registrationId = GetSelectedOption(dropSelect);
+      const endPoint = `/students/${registrationId}`;
+      
+      fetch(endPoint, {
+        method: 'DELETE'
+      })
+        .then((response) => response.json())
+        .then((data) => window.location.href = data.redirect)
+        .catch(err => console.log(err));      
+    });
+
     // Function to hide the add/drop section
     function hideFunction() {
       var x = document.getElementById("hidden"),
@@ -63,6 +121,13 @@
       displayValue = "none";
 
       x.style.display = displayValue;
+    }
+
+    // Determine the id for the currently selected course
+    function GetSelectedOption(select) {
+      let options = select.getElementsByTagName('option');
+      resultId = options[select.selectedIndex].value;
+      return resultId;
     }
   </script>
 </body>

@@ -70,7 +70,6 @@ const requireStudent = (req, res, next) => {
             else {
                 // check if the user is a student
                 let user = await User.findById(decodedToken.id);
-                console.log("HERE:   " + user.isTeacher);
                 let student = false;
 
                 if (!user.isTeacher) {              

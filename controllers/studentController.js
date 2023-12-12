@@ -1,35 +1,39 @@
+const jwt = require('jsonwebtoken');
 const Registration = require('../models/Registration');
 const Course = require('../models/Course');
-const User = require('../models/User');
 
-module.exports.student_index = (req, res) => {
-    res.render('students', { title: 'Students' });
+module.exports.student_index = async (req, res) => {
+    let registrations = {};
+    let userId = getUser(req);
+
+    Registration.find({ "userId": userId }).sort({ course: 1 })
+        .then(regResult => {
+            registrations = regResult;
+        })
+        .then(() => {
+            Course.find().sort({ cname: 1 })
+                .then((result) => {
+                    res.render('students', {courses: result, registrations: registrations, title: 'Students' });
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+            })
+        .catch((err) => {
+            console.log(err);
+        });
 };
 
 module.exports.registration_create_post = (req, res) => {
-    const userId = req.params.userId;
-    const courseId = req.params.courseId;
-    const registration = new Registration(userId, courseId);
-    
+    const registration = new Registration(req.body);
+
     registration.save()
         .then((result) => {
             res.redirect('/students');
         })
         .catch(err => {
             console.log(err);
-        });
-};
-
-module.exports.registration_update_post = (req, res) => {
-    const id = req.params.id;
-    Registration.updateOne({ _id: id }, { courseId: req.body.courseId })
-        .then((result) => {
-            res.redirect('/students');
-        })
-        .catch((err) => {
-            console.log(err);
-            res.status(404).render('404', { title: '404' });
-        });
+        });    
 };
 
 module.exports.registration_delete_post = (req, res) => {
@@ -57,5 +61,17 @@ module.exports.registrations_get = (req, res) => {
     catch (err) {
         console.log(err);
         res.status(404).render('404', { title: '404' });
+    }
+};
+
+function getUser (req) {
+    const token = req.cookies.jwt;
+
+    if(token) {
+        let decodedToken = jwt.verify(token, 'aardvarkValleyInstitute');
+        return decodedToken.id;
+    }
+    else {
+        return null;
     }
 };
