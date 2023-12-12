@@ -21,7 +21,7 @@
                             <label for="cname">Course Name</label>
                           </div>
                           <div class="input-col">
-                            <input type="text" id="cname" name="cname" placeholder="Course name.." required>
+                            <input type="text" id="cname" name="cname" placeholder="Course name.." autocomplete="off" required>
                           </div>
                         </div>
                         <div class="row">
@@ -38,6 +38,7 @@
                           </div>
                           <div class="input-col">
                             <select name="sarea" id="sarea" required>
+                              <option value="">-- Choose a subject --</option>
                               <% if (subjects.length > 0) { %>
                                 <% subjects.forEach(subject => { %>
                                   <option value="<%= subject.title %>"><%= subject.title %></option>                                
@@ -53,7 +54,7 @@
                             <label for="chours">Credit Hours</label>
                           </div>
                           <div class="input-col">
-                            <input type="text" id="chours" name="chours" placeholder="Number of credit hours.." required>
+                            <input type="text" id="chours" name="chours" placeholder="Number of credit hours.." autocomplete="off" required>
                           </div>
                         </div>
                         <br>

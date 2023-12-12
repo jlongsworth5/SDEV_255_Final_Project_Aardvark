@@ -130,6 +130,11 @@ p, main ul, .hide-select {
   color: #999;
 }
 
+#welcome-name {
+  font-size: 1.35em;
+  color: #878787;
+}
+
 #not-found {
   margin: 250px auto;
   font-weight: 600;
