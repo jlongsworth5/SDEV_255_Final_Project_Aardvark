@@ -5,16 +5,18 @@
       <nav>
         <ul>
           <% if (user) { %>
-            <li id="welcome-name">Welcome, <%= user.firstName %>!</li>
-            <li><a href="/logout">Log out</a></li>            
+            <li id="welcome-name">Welcome, <%= user.firstName %>!</li>           
             <li><a href="/">Home</a></li> 
             <li><a href="/courses">Courses</a></li>
             <% if (user.isTeacher) { %>
               <li><a href="/staff">Modify Courses</a></li>
+              <li><a href="/logout">Log out</a></li> 
             <% } else { %>            
               <li><a href="/students">Schedule</a></li>
+              <li><a href="/logout">Log out</a></li> 
             <% } %>
           <% } else { %>
+            <li><a href="/courses">Courses</a></li>
             <li><a href="/login">Log in</a></li>
             <li><a href="/signup">Sign up</a></li>
           <% } %>
