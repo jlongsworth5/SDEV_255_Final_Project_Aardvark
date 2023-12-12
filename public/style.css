@@ -182,7 +182,7 @@ p, main ul, .hide-select {
   width: 90%;
 }
 
-#courses-offered, #course-list {
+#courses-offered, #course-list, #your-course-list {
   text-align: left;
 }
 
@@ -232,19 +232,19 @@ p, main ul, .hide-select {
   background-color: #ac5633;
 }
 
-#course-list a {
+#course-list a, #your-course-list a {
   display: block;
   text-decoration: none;
   margin: 40px;
 }
 
-#course-list a:hover h3 {
+#course-list a:hover h3, #your-course-list a:hover h3 {
   color: #ac5633;
   padding-left: 5px;
   border-left: 6px solid #ac5633;
 }
 
-#welcome, #about-us, #contact, #signup, #login, #hidden, #sign-up, #signup-btn, #courses-offered, #course-detail, #course-list, #modify, #add-class, #delete-class, #modify-class {
+#welcome, #about-us, #contact, #signup, #login, #hidden, #sign-up, #signup-btn, #courses-offered, #course-detail, #course-list, #your-course-list, #modify, #add-class, #delete-class, #modify-class {
   background-color: #303030;
   padding: 30px;
   width: 80%;
