@@ -1,18 +1,18 @@
 <header>
-    <img src="/logo.svg" alt="logo" class="logo" id="logo">
+    <a href="/"><img src="/logo.svg" alt="logo" class="logo" id="logo"></a>
 
     <div class="navbar">
       <nav>
         <ul>
           <% if (user) { %>
-            <li>Welcome, <%= user.firstName %></li>
+            <li id="welcome-name">Welcome, <%= user.firstName %>!</li>
             <li><a href="/logout">Log out</a></li>            
             <li><a href="/">Home</a></li> 
             <li><a href="/courses">Courses</a></li>
             <% if (user.isTeacher) { %>
-              <li><a href="/staff">Staff</a></li>
+              <li><a href="/staff">Modify Courses</a></li>
             <% } else { %>            
-              <li><a href="/students">Students</a></li>
+              <li><a href="/students">Schedule</a></li>
             <% } %>
           <% } else { %>
             <li><a href="/login">Log in</a></li>
